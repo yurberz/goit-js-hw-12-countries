@@ -1,5 +1,5 @@
-import countryTpl from "../templates/country.hbs";
 import countriesTpl from "../templates/list-countries.hbs";
+import countryTpl from "../templates/country.hbs";
 import refs from "./refs";
 import { notice } from "@pnotify/core";
 import "@pnotify/core/dist/PNotify.css";
@@ -8,6 +8,8 @@ import "@pnotify/core/dist/BrightTheme.css";
 //===
 
 const updateMarkup = (countriesMarkup) => {
+  clearMarkup();
+
   if (countriesMarkup.length === 1) {
     refs.body.insertAdjacentHTML("beforeend", countryTpl(countriesMarkup));
   }
@@ -22,6 +24,18 @@ const updateMarkup = (countriesMarkup) => {
       text: "Too many matches found. Please enter a more specific query!",
       delay: 1500,
     });
+  }
+};
+
+//===
+
+const clearMarkup = () => {
+  removeElement(document.querySelector(".js-container"));
+};
+
+const removeElement = (element) => {
+  if (element) {
+    element.remove();
   }
 };
 
